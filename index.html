@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đăng ký giải Gà Mới Nổi</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',Arial,sans-serif;
+}
+
+body{
+    background-image:url("33.jpg");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.register{
+    width:100%;
+    max-width:480px;
+}
+
+.title{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.line{
+    width:80px;
+    height:6px;
+    background:linear-gradient(90deg,#ff00cc,#ffd700);
+    border-radius:5px;
+}
+
+.title h2{
+    color:#fff;
+    text-shadow:0 0 12px gold;
+    font-size:30px;
+}
+
+.box{
+    background:rgba(17,24,39,.88);
+    border:2px solid #ffb300;
+    border-radius:20px;
+    padding:25px;
+    box-shadow:0 0 20px #ffb300;
+}
+
+input{
+    width:100%;
+    height:55px;
+    margin-bottom:18px;
+    border:none;
+    outline:none;
+    border-radius:10px;
+    background:#1d2435;
+    color:#fff;
+    padding:0 15px;
+    font-size:17px;
+    border:2px solid #333;
+}
+
+input:focus{
+    border-color:#ffd700;
+}
+
+button{
+    width:100%;
+    height:60px;
+    border:none;
+    cursor:pointer;
+    border-radius:12px;
+    font-size:22px;
+    font-weight:bold;
+    background:linear-gradient(90deg,#ffd700,#ff9800);
+    transition:.3s;
+}button:hover{
+    transform:scale(1.02);
+}
+
+.khung-danh-sach{
+    margin-top:18px;
+    max-height:220px;
+    overflow-y:auto;
+    border-top:1px solid rgba(255,215,0,.2);
+    padding-top:12px;
+}
+
+.khung-danh-sach::-webkit-scrollbar{
+    width:4px;
+}
+
+.khung-danh-sach::-webkit-scrollbar-thumb{
+    background:#ffd700;
+}
+
+ul{
+    list-style:none;
+}
+
+li{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px;
+    margin-bottom:8px;
+    background:rgba(255,255,255,.05);
+    border-left:4px solid gold;
+    border-radius:8px;
+    color:#fff;
+}
+
+.info{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+    font-size:14px;
+}
+
+.info b{
+    color:#ffd700;
+    font-size:16px;
+}
+
+.btn-xoa{
+    width:auto;
+    height:auto;
+    background:#e74c3c;
+    color:#fff;
+    padding:6px 12px;
+    border-radius:6px;
+    font-size:13px;
+}
+
+.footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:15px;
+    padding-top:10px;
+    border-top:1px solid rgba(255,215,0,.15);
+    color:#ccc;
+    font-size:13px;
+}
+
+.so-luong{
+    color:#ffd700;
+    font-weight:bold;
+}
+
+.btn-nho{
+    width:auto;
+    height:auto;
+    padding:8px 14px;
+    border-radius:8px;
+    font-size:13px;
+    background:rgba(255,255,255,.08);
+    color:#fff;
+}.btn-nho:hover{
+    background:#e74c3c;
+}
+
+.empty{
+    text-align:center;
+    color:#aaa;
+    font-style:italic;
+    padding:20px 0;
+}
+
+.luu-y{
+    margin-top:15px;
+    padding:10px;
+    border-radius:10px;
+    background:rgba(255,215,0,.08);
+    color:#ffd700;
+    text-align:center;
+    font-size:13px;
+}
+
+#toast{
+    position:fixed;
+    top:20px;
+    right:-400px;
+    background:#00c853;
+    color:#fff;
+    padding:15px 25px;
+    border-radius:10px;
+    font-weight:bold;
+    transition:.4s;
+}
+
+#toast.show{
+    right:20px;
+}
+
+#toast.error{
+    background:#e74c3c;
+}
+
+@media(max-width:480px){
+
+    .box{
+        padding:18px;
+    }
+
+    input{
+        height:50px;
+    }
+
+    button{
+        height:55px;
+    }
+
+    .footer{
+        flex-direction:column;
+        gap:10px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="register">
+
+    <div class="title">
+        <div class="line"></div>
+        <h2>ĐĂNG KÝ THAM GIA</h2>
+        <div class="line"></div>
+    </div>
+
+    <div class="box"><input type="text" id="doi" placeholder="🏆 Tên đội">
+
+<input type="text" id="nguoi1" placeholder="👤 Tên thật người chơi 1">
+
+<input type="text" id="nguoi2" placeholder="👤 Tên thật người chơi 2">
+
+<button onclick="dangky()">
+    ĐĂNG KÝ NGAY
+</button>
+
+<div class="khung-danh-sach">
+    <ul id="danhSach"></ul>
+</div>
+
+<div class="footer">
+    <span>
+        👥
+        <span class="so-luong" id="soLuong">0</span>
+        đội
+    </span>
+
+    <button
+        class="btn-nho"
+        onclick="xoaTatCa()">
+        🗑️ Xóa hết
+    </button>
+</div>
+
+<div class="luu-y">
+    ⚠️ <b>Đừng xoá thông tin các đội đã đăng ký.</b>
+</div>
+
+</div>
+</div>
+
+<div id="toast"></div>
+
+<audio id="bgm" loop autoplay>
+    <source src="nhachay.mp3" type="audio/mpeg">
+</audio><script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+    getDatabase,
+    ref,
+    push,
+    onValue,
+    remove
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyB9T2JPoktoA38Rljv7VxNqQr-A-x-KRL0",
+    authDomain: "gamoinoi-8d062.firebaseapp.com",
+    databaseURL: "https://gamoinoi-8d062-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "gamoinoi-8d062",
+    storageBucket: "gamoinoi-8d062.firebasestorage.app",
+    messagingSenderId: "267018988055",
+    appId: "1:267018988055:web:0c24396abee6b0150d8a52"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const dbRef = ref(db,"danhSachGa");
+
+let ds = [];function toast(msg,error=false){
+
+    const t=document.getElementById("toast");
+
+    t.textContent=msg;
+
+    t.className=error?"error":"";
+
+    t.classList.add("show");
+
+    clearTimeout(t._timer);
+
+    t._timer=setTimeout(()=>{
+        t.classList.remove("show");
+    },3000);
+
+}
+
+onValue(dbRef,(snapshot)=>{
+
+    ds=[];
+
+    snapshot.forEach((item)=>{
+
+        ds.push({
+            id:item.key,
+            ...item.val()
+        });
+
+    });
+
+    hienThi();
+
+});
+
+function hienThi(){
+
+    const ul=document.getElementById("danhSach");
+    const sl=document.getElementById("soLuong");
+
+    if(ds.length===0){
+
+        ul.innerHTML=`
+        <li class="empty">
+            🐔 Chưa có đội nào đăng ký
+        </li>
+        `;
+
+    }else{
+
+        ul.innerHTML=ds.map((item,index)=>`
+
+        <li>
+
+            <div class="info">
+
+                <b>#${index+1} - ${item.doi}</b>
+
+                <span>👤 ${item.nguoi1}</span>
+
+                <span>👤 ${item.nguoi2}</span>
+
+            </div>
+
+            <button
+                class="btn-xoa"
+                onclick="xoaMotNguoi('${item.id}')">
+                ✕
+            </button>
+
+        </li>
+
+        `).join("");
+
+    }
+
+    sl.textContent=ds.length;
+
+}function dangky(){
+
+    const doi=document.getElementById("doi").value.trim();
+    const nguoi1=document.getElementById("nguoi1").value.trim();
+    const nguoi2=document.getElementById("nguoi2").value.trim();
+
+    if(!doi){
+        toast("⚠️ Nhập tên đội!",true);
+        return;
+    }
+
+    if(!nguoi1){
+        toast("⚠️ Nhập tên người chơi 1!",true);
+        return;
+    }
+
+    if(!nguoi2){
+        toast("⚠️ Nhập tên người chơi 2!",true);
+        return;
+    }
+
+    if(ds.some(x=>x.doi.toLowerCase()===doi.toLowerCase())){
+        toast("⚠️ Đội này đã đăng ký!",true);
+        return;
+    }
+
+    push(dbRef,{
+        doi:doi,
+        nguoi1:nguoi1,
+        nguoi2:nguoi2,
+        time:Date.now()
+    });
+
+    document.getElementById("doi").value="";
+    document.getElementById("nguoi1").value="";
+    document.getElementById("nguoi2").value="";
+
+    document.getElementById("bgm").play().catch(()=>{});
+
+    alert("🎉 ĐĂNG KÝ THÀNH CÔNG!");
+
+    toast("🎉 Đăng ký thành công!");
+
+}function xoaMotNguoi(id){
+
+    if(!confirm("Xóa đội này?")) return;
+
+    remove(ref(db,"danhSachGa/"+id));
+
+    toast("🗑️ Đã xóa!");
+
+}
+
+function xoaTatCa(){
+
+    if(!confirm("Xóa toàn bộ danh sách?")) return;
+
+    remove(dbRef);
+
+    toast("🗑️ Đã xóa tất cả!");
+
+}
+
+document.addEventListener("keydown",function(e){
+
+    if(e.key==="Enter"){
+        dangky();
+    }
+
+});
+
+window.addEventListener("load",function(){
+
+    document.getElementById("doi").focus();
+
+    document.getElementById("bgm").play().catch(()=>{});
+
+});
+window.dangky = dangky;
+window.xoaMotNguoi = xoaMotNguoi;
+window.xoaTatCa = xoaTatCa;
+</script>
+
+</body>
+</html>

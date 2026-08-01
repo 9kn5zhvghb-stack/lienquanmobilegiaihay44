@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
@@ -433,6 +433,13 @@ function hienThi(){
 
 }function xoaMotNguoi(id){
 
+    const mk = prompt("Nhập mật khẩu để xóa:");
+
+    if(mk !== "Huyle2008"){
+        alert("❌ Sai mật khẩu!");
+        return;
+    }
+
     if(!confirm("Xóa đội này?")) return;
 
     remove(ref(db,"danhSachGa/"+id));
@@ -443,14 +450,20 @@ function hienThi(){
 
 function xoaTatCa(){
 
-    if(!confirm("Xóa toàn bộ danh sách?")) return;
+    const mk = prompt("🔒 Nhập mật khẩu để xóa toàn bộ:");
+
+    if(mk !== "Huyle2008"){
+        alert("❌ Sai mật khẩu!");
+        return;
+    }
+
+    if(!confirm("⚠️ Xóa toàn bộ danh sách?")) return;
 
     remove(dbRef);
 
     toast("🗑️ Đã xóa tất cả!");
 
 }
-
 document.addEventListener("keydown",function(e){
 
     if(e.key==="Enter"){

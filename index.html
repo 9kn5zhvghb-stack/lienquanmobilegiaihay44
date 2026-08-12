@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Đăng ký giải Gà Mới Nổi</title>
+<title>Đăng ký giải ĐẠI CHIẾN TAM CA</title>
 
 <style>
 *{
@@ -247,10 +247,10 @@ li{
 
     <div class="box"><input type="text" id="doi" placeholder="🏆 Tên đội">
 
-<input type="text" id="nguoi1" placeholder="👤 Tên thật người chơi 1">
+<input type="text" id="nguoi1" placeholder="👤 Tên thật đội trưởng">
 
 <input type="text" id="nguoi2" placeholder="👤 Tên thật người chơi 2">
-
+<input type="text" id="nguoi3" placeholder="👤 Tên thật người chơi 3">
 <button onclick="dangky()">
     ĐĂNG KÝ NGAY
 </button>
@@ -283,7 +283,7 @@ li{
 <div id="toast"></div>
 
 <audio id="bgm" loop autoplay>
-    <source src="nhachay.mp3" type="audio/mpeg">
+    <source src="nhacvip.mp3" type="audio/mpeg">
 </audio><script type="module">
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
@@ -371,7 +371,7 @@ function hienThi(){
                 <span>👤 ${item.nguoi1}</span>
 
                 <span>👤 ${item.nguoi2}</span>
-
+<span>👤 ${item.nguoi3}</span>
             </div>
 
             <button
@@ -393,7 +393,7 @@ function hienThi(){
     const doi=document.getElementById("doi").value.trim();
     const nguoi1=document.getElementById("nguoi1").value.trim();
     const nguoi2=document.getElementById("nguoi2").value.trim();
-
+const nguoi3=document.getElementById("nguoi3").value.trim();
     if(!doi){
         toast("⚠️ Nhập tên đội!",true);
         return;
@@ -408,7 +408,10 @@ function hienThi(){
         toast("⚠️ Nhập tên người chơi 2!",true);
         return;
     }
-
+if(!nguoi2){
+        toast("⚠️ Nhập tên người chơi 3!",true);
+        return;
+    }
     if(ds.some(x=>x.doi.toLowerCase()===doi.toLowerCase())){
         toast("⚠️ Đội này đã đăng ký!",true);
         return;
@@ -418,13 +421,14 @@ function hienThi(){
         doi:doi,
         nguoi1:nguoi1,
         nguoi2:nguoi2,
+        nguoi3:nguoi3,
         time:Date.now()
     });
 
     document.getElementById("doi").value="";
     document.getElementById("nguoi1").value="";
-    document.getElementById("nguoi2").value="";
-
+document.getElementById("nguoi2").value="";
+document.getElementById("nguoi3").value="";
     document.getElementById("bgm").play().catch(()=>{});
 
     alert("🎉 ĐĂNG KÝ THÀNH CÔNG!");
